@@ -2,17 +2,11 @@
 view: customer_matching {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
-  sql_table_name: `handson.customer_matching` ;;
-  drill_fields: [user_pseudo_id]
+  sql_table_name: `nexttokyo.handson.customer_matching` ;;
 
-  # This primary key is the unique key for this table in the underlying database.
-  # You need to define a primary key in a view in order to join to other views.
+  # No primary key is defined for this view. In order to join this view in an Explore,
+  # define primary_key: yes on a dimension that has no repeated values.
 
-  dimension: user_pseudo_id {
-    primary_key: yes
-    type: string
-    sql: ${TABLE}.user_pseudo_id ;;
-  }
     # Here's what a typical dimension looks like in LookML.
     # A dimension is a groupable field that can be used to filter query results.
     # This dimension will be called "Customer ID" in Explore.
@@ -22,8 +16,13 @@ view: customer_matching {
     # hidden: yes
     sql: ${TABLE}.customer_id ;;
   }
+
+  dimension: user_pseudo_id {
+    type: string
+    sql: ${TABLE}.user_pseudo_id ;;
+  }
   measure: count {
     type: count
-    drill_fields: [user_pseudo_id, customer.last_name, customer.id, customer.first_name]
+    drill_fields: [customer.last_name, customer.id, customer.first_name]
   }
 }

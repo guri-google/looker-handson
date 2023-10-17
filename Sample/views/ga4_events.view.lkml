@@ -59,4 +59,29 @@ view: ga4_events {
     type: count
     drill_fields: [event_name, device_mobile_brand_name, device_mobile_model_name]
   }
+
+  measure: page_view {
+    type: sum
+    sql: if ( ${event_name} = "page_view",1, 0) ;;
+  }
+
+  measure: session {
+    type: sum
+    sql: if ( ${event_name} = "session_start",1, 0) ;;
+  }
+
+  measure: click {
+    type: sum
+    sql: if ( ${event_name} = "click",1, 0) ;;
+  }
+
+  measure: new_user {
+    type: sum
+    sql: if ( ${event_name} = "first_visit",1, 0) ;;
+  }
+
+  measure: purchase {
+    type: sum
+    sql: if ( ${event_name} = "purchase",1, 0) ;;
+  }
 }

@@ -74,14 +74,4 @@ view: ga4_events {
     type: sum
     sql: if ( ${event_name} = "click",1, 0) ;;
   }
-
-  measure: new_user {
-    type: sum
-    sql: if ( ${event_name} = "first_visit",1, 0) ;;
-  }
-
-  measure: purchase {
-    type: sum
-    sql: if ( ${event_name} = "purchase",1, 0) ;;
-  }
 }
